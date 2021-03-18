@@ -1,0 +1,21 @@
+{
+  "name": "github-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p ./",
+    "start": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/isomorphic-fetch": "0.0.35",
+    "github-apiv4": "file:../github-apiv4",
+    "isomorphic-fetch": "^3.0.0",
+    "nodemon": "^2.0.7",
+    "typescript": "^4.2.3"
+  }
+}
