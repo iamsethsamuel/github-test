@@ -19,8 +19,8 @@ fetch('https://api.github.com/graphql', {
   body: JSON.stringify({ query: query}),
 }).then(res => res.json().then(res => {
     if(res.data){
-      const resSponsorsListing:types.Search = res.data
-      console.log(resSponsorsListing.search.nodes )
+      const response:types.Search = res.data
+      console.log(response.search.nodes )
     
     }else{
       console.log("An error occurred",res) 
