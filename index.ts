@@ -1,14 +1,14 @@
-import {queries, types} from "github-apiv4"
+import {queries, types, mutations} from "github-apiv4"
 import fetch from "isomorphic-fetch";
 
-const accessCode = 'e589bd4b4ae70f25d2e8ca0c3ca0f1f4452a20a0'; 
+const accessCode = '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'; 
 const user = queries.User("bio")
 const onUser = queries.onUser(user)
 const fields = `
   ... on App { id }
   ... on Organization {id description url}
 ` 
-const query = queries.Search("facebook",10,fields,"USER")
+const mutation = mutations.UpdateRepositoryInput({repositoryId: "MDEwOlJlcG9zaXRvcnkzNjcwNjY5OTY=", description: "Just trying",  name:"GitHubv4-api mutation"},queries.Repository("name description"))
 
 fetch('https://api.github.com/graphql', {
   method: 'POST',
@@ -16,15 +16,14 @@ fetch('https://api.github.com/graphql', {
       'Content-Type': 'application/json',
       'Authorization': `bearer ${accessCode}`
   },
-  body: JSON.stringify({ query: query}),
+  body: JSON.stringify({ query: mutation}),
 }).then(res => res.json().then(res => {
-    if(res.data){
-      const response:types.Search = res.data
-      console.log(response.search.nodes )
+    if(res.data){ 
+      console.log(res.data)
     
     }else{
       console.log("An error occurred",res) 
-      console.log(query)
+      console.log(mutation)
     }
   }))
   .catch(err => console.log(err));
