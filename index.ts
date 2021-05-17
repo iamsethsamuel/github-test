@@ -9,8 +9,10 @@ const fields = `
   ... on Organization {id description url}
 ` 
 // const mutation = mutations.UpdateRepository({repositoryId: "MDEwOlJlcG9zaXRvcnkzNjcwNjY5OTY=", description: "Just trying",  name:"GitHubv4-api mutation"},queries.Repository("name description"))
-const mutation = mutations.CreateRef({repositoryId: "MDEwOlJlcG9zaXRvcnkzNjcwNjY5OTY=", name:"GitHubv4-api mutation Ref",oid:"ref/mutation"},queries.Ref ("name"))
-
+// const mutation = mutations.CreateRef({repositoryId: "MDEwOlJlcG9zaXRvcnkzNjcwNjY5OTY=", name:"GitHubv4-api mutation Ref",oid:"ref/mutation"},queries.Ref ("name"))
+// const mutation = mutations.AcceptTopicSuggestion({repositoryId: "MDEwOlJlcG9zaXRvcnkzNjcwNjY5OTY=", name:"GitHubv4-api mutation Topic"},queries.Topic ("name"))  
+// const mutation = mutations.AddAssigneesToAssignable({assigneeIds:["MDQ6VXNlcjIyODE3NDky","MDQ6VXNlcjIzMjgyMDU5"],assignableId:"MDExOlB1bGxSZXF1ZXN0NjIyMTYzMjY0"},queries.Assignable(queries.Assignees({first:10,fields:"login"})))
+const mutation = queries.RepositoryQuery("github-apiv4","ioedeveloper" ,`id ${queries.PullRequests({first:50,fields:"id body viewerDidAuthor",states:"OPEN"})}`) 
 fetch('https://api.github.com/graphql', {
   method: 'POST',
   headers: { 
@@ -20,7 +22,8 @@ fetch('https://api.github.com/graphql', {
   body: JSON.stringify({ query: mutation}),
 }).then(res => res.json().then(res => {
     if(res.data){ 
-      console.log(res.data)
+      // console.log(res.data.addAssigneesToAssignable)
+      console.log(res.data.repository.pullRequests)
     
     }else{
       console.log("An error occurred",res) 
