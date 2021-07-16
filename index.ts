@@ -1,7 +1,7 @@
 import {queries, types, mutations} from "github-apiv4"
 import fetch from "isomorphic-fetch";
 
-const accessCode = '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'; 
+const accessCode = AccessToken; 
 const user = queries.User("bio")
 const onUser = queries.onUser(user)
 const fields = `
